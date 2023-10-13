@@ -30,18 +30,22 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(500).send("Internal server error");
     }
 }));
-router.get("/:exerciseid", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/:exerciseId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const exerciseId = +req.params.exerciseId;
         const exerciseRepository = index_1.dataSource.getRepository(Exercise_1.Exercise);
-        const exercise = yield exerciseRepository.findOne(req.params.id);
+        const exercise = exerciseRepository.find({
+            where: {
+                ExerciseID: exerciseId,
+            },
+        });
         if (!exercise) {
             return res.status(404).send("Exercise not found");
         }
         return res.status(200).send(exercise);
     }
     catch (error) {
-        console.error("Error:", error);
-        return res.status(500).send("Internal server error");
+        // error handling
     }
 }));
 module.exports = router;
