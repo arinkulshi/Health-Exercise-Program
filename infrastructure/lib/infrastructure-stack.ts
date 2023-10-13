@@ -10,6 +10,8 @@ import * as s3deploy from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfront_origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as iam from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
+import * as rds from 'aws-cdk-lib/aws-rds';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
 
 export class InfrastructureStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps) {
@@ -79,6 +81,38 @@ export class InfrastructureStack extends Stack {
       distribution,
       distributionPaths: ["/*"],
     });
+
+    
+    const vpc = new ec2.Vpc(this, 'MyVpc', { maxAzs: 2 }); 
+
+
+    const dbInstance = new rds.DatabaseInstance(this, 'MyInstance', {
+      engine: rds.DatabaseInstanceEngine.postgres({
+        version: rds.PostgresEngineVersion.VER_13_3,
+      }),
+      credentials: rds.Credentials.fromGeneratedSecret('admin'), 
+      instanceType: ec2.InstanceType.of(
+        ec2.InstanceClass.BURSTABLE2,
+        ec2.InstanceSize.SMALL,
+      ),
+      vpc,
+    });
+
+
+    new CfnOutput(this, 'DBInstanceEndpointAddress', {
+      value: dbInstance.dbInstanceEndpointAddress,
+    });
+
   }
+
+
+
+
+
+
+
+
+
+  
 
 }

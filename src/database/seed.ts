@@ -22,7 +22,7 @@ async function seedData() {
         return exercise;
     });
 
-    await dataSource.manager.save(patients);
+    const savedPatients =   await dataSource.manager.save(patients);
     await dataSource.manager.save(exercises);
 
 }

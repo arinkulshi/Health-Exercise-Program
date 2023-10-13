@@ -7,6 +7,7 @@ exports.dataSource = exports.authenticateJWT = exports.app = void 0;
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const express_1 = __importDefault(require("express"));
+const cors = require('cors');
 // Entities
 const Patient_1 = require("./entity/Patient");
 const Provider_1 = require("./entity/Provider");
@@ -21,16 +22,20 @@ exports.authenticateJWT = (0, express_jwt_1.expressjwt)({ secret: '1234', algori
 const patientRoutes = require('./routes/patientRoutes');
 const exerciseRoutes = require('./routes/exerciseRoutes');
 const authRoutes = require('./routes/authRoutes');
+const patientPerformsExercise = require('./routes/patientPerformsExerciseRoutes');
+exports.app.use(cors());
 exports.app.use('/auth', authRoutes);
 exports.app.use('/patients', patientRoutes);
 exports.app.use('/exercises', exerciseRoutes);
+exports.app.use('/patients_exercises', patientPerformsExercise);
+require('dotenv').config();
 exports.dataSource = new typeorm_1.DataSource({
     type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "password",
-    database: "hep",
+    host: process.env.DB_HOST,
+    port: +process.env.DB_PORT,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     entities: [
         Patient_1.Patient,
         Provider_1.Provider,
@@ -38,8 +43,8 @@ exports.dataSource = new typeorm_1.DataSource({
         Program_1.Program,
         PatientPerformsExercise_1.PatientPerformsExercise
     ],
-    synchronize: true,
-    logging: false
+    synchronize: process.env.DB_SYNCHRONIZE === 'true',
+    logging: process.env.DB_LOGGING === 'true'
 });
 exports.dataSource.initialize().then(() => {
     exports.app.listen(port, () => {

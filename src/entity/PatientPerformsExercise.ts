@@ -27,3 +27,5 @@ export class PatientPerformsExercise {
     @CreateDateColumn()
     PerformedDate: Date;
 }
+
+
