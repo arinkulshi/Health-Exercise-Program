@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from '../index';  // Ensure you export your app from its module
+import { app } from '../index';  
 
 describe('Patient Routes', () => {
   

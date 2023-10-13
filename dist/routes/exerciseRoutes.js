@@ -45,7 +45,6 @@ router.get("/:exerciseId", (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.status(200).send(exercise);
     }
     catch (error) {
-        // error handling
     }
 }));
 module.exports = router;

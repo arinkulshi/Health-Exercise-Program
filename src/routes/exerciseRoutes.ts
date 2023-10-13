@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { dataSource } from "../index";
 import { Exercise } from "../entity/Exercise";
-import { FindOneOptions } from "typeorm";
+
 
 const router = Router();
 
@@ -40,7 +40,7 @@ router.get("/:exerciseId", async (req, res) => {
 
     return res.status(200).send(exercise);
   } catch (error) {
-    // error handling
+  
   }
 });
 

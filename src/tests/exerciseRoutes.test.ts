@@ -1,11 +1,11 @@
 import request from 'supertest';
-import { app } from '../index';  // Ensure you export your app from its module
+import { app } from '../index';  
 import { Exercise } from '../entity/Exercise';
 import { dataSource } from "../index";
 
 describe('Exercise Routes', () => {
 
-  // POST: Create a new exercise
+  
   it('should create a new exercise', async () => {
     const response = await request(app)
       .post('/exercises')
@@ -20,11 +20,11 @@ describe('Exercise Routes', () => {
     expect(response.body.description).toBe('A basic squat exercise');
     expect(response.body.videoURL).toBe('http://example.com/squat');
 
-    // Cleanup: Delete the created exercise
+    
     await dataSource.getRepository(Exercise).delete(response.body.exerciseID);
   });
 
-  // GET: Retrieve all exercises
+  
   it('should retrieve all exercises', async () => {
     const response = await request(app).get('/exercises');
 

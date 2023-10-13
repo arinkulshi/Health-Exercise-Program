@@ -14,26 +14,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const index_1 = require("../index");
-const Exercise_1 = require("../entity/Exercise");
+const PatientPerformsExercise_1 = require("../entity/PatientPerformsExercise");
 const index_2 = require("../index");
-describe('Exercise Routes', () => {
-    it('should create a new exercise', () => __awaiter(void 0, void 0, void 0, function* () {
+describe('PatientPerformsExercise Routes', () => {
+    it('should create a new patient performs exercise record', () => __awaiter(void 0, void 0, void 0, function* () {
+        const testPatientId = 1;
+        const testExerciseId = 1;
         const response = yield (0, supertest_1.default)(index_1.app)
-            .post('/exercises')
+            .post('/patient-performs-exercise')
             .send({
-            name: 'Squat',
-            description: 'A basic squat exercise',
-            videoURL: 'http://example.com/squat'
+            PatientID: testPatientId,
+            ExerciseID: testExerciseId
         });
         expect(response.status).toBe(201);
-        expect(response.body.name).toBe('Squat');
-        expect(response.body.description).toBe('A basic squat exercise');
-        expect(response.body.videoURL).toBe('http://example.com/squat');
-        yield index_2.dataSource.getRepository(Exercise_1.Exercise).delete(response.body.exerciseID);
+        expect(response.body.PatientID).toBe(testPatientId);
+        expect(response.body.ExerciseID).toBe(testExerciseId);
+        yield index_2.dataSource.getRepository(PatientPerformsExercise_1.PatientPerformsExercise).delete({
+            PatientID: response.body.PatientID,
+            ExerciseID: response.body.ExerciseID
+        });
     }));
-    it('should retrieve all exercises', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield (0, supertest_1.default)(index_1.app).get('/exercises');
+    // GET: Retrieve all records of patients performing exercises
+    it('should retrieve all patient performs exercise records', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield (0, supertest_1.default)(index_1.app).get('/patient-performs-exercise');
         expect(response.status).toBe(200);
         expect(Array.isArray(response.body)).toBe(true);
     }));
+    // Additional tests for other routes can be added similarly...
 });
