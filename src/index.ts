@@ -28,15 +28,16 @@ app.use('/auth', authRoutes);
 app.use('/patients',patientRoutes);
 app.use('/exercises', exerciseRoutes);
 
+require('dotenv').config();
 
 
 export const dataSource = new DataSource({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "password",
-    database: "hep",
+    type:"postgres",
+    host: process.env.DB_HOST,
+    port: +process.env.DB_PORT,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     entities: [
         Patient,
         Provider,
@@ -44,9 +45,11 @@ export const dataSource = new DataSource({
         Program,
         PatientPerformsExercise
     ],
-    synchronize: true, 
-    logging: false
+    synchronize: process.env.DB_SYNCHRONIZE === 'true',
+    logging: process.env.DB_LOGGING === 'true'
 });
+
+
 
 dataSource.initialize().then(() => {
     app.listen(port, () => {
