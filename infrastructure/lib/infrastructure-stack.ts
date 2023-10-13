@@ -16,7 +16,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 export class InfrastructureStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
-    const challengeId = "arin";
+    const idc = "arin";
     const cloudfrontOAI = new cloudfront.OriginAccessIdentity(
       this,
       `${id}cloudfront-OAI`,
@@ -26,7 +26,7 @@ export class InfrastructureStack extends Stack {
     );
 
     // Content bucket
-    const siteBucket = new s3.Bucket(this, `${id}DashBucket`, {
+    const siteBucket = new s3.Bucket(this, `${idc}DashBucket`, {
       publicReadAccess: false,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
     });
@@ -46,7 +46,7 @@ export class InfrastructureStack extends Stack {
     new CfnOutput(this, "Bucket", { value: siteBucket.bucketName });
 
     // CloudFront distribution
-    const distribution = new cloudfront.Distribution(this, `${challengeId}DashDistribution`, {
+    const distribution = new cloudfront.Distribution(this, `${idc}DashDistribution`, {
       defaultRootObject: "index.html",
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       errorResponses: [
@@ -75,7 +75,7 @@ export class InfrastructureStack extends Stack {
     });
 
     // Deploy site contents to S3 bucket
-    new s3deploy.BucketDeployment(this, `${challengeId}DeployWithInvalidation`, {
+    new s3deploy.BucketDeployment(this, `${idc}DeployWithInvalidation`, {
       sources: [s3deploy.Source.asset("../app/build")],
       destinationBucket: siteBucket,
       distribution,

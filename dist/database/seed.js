@@ -29,7 +29,7 @@ function seedData() {
             exercise.VideoURL = faker_1.faker.airline.airline().name;
             return exercise;
         });
-        yield index_1.dataSource.manager.save(patients);
+        const savedPatients = yield index_1.dataSource.manager.save(patients);
         yield index_1.dataSource.manager.save(exercises);
     });
 }

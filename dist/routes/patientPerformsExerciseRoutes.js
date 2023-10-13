@@ -48,4 +48,4 @@ router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(500).send("Internal server error");
     }
 }));
-exports.default = router;
+module.exports = router;
