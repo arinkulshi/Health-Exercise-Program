@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { faker } from '@faker-js/faker';
 
-// Generate a random username and password
+
 const username = faker.internet.userName();
 const password = faker.internet.password();
 
 console.log(`Generated Credentials - Username: ${username}, Password: ${password}`);
 
-// Define the API endpoint
+
 const apiEndpoint = 'http://localhost:3000/auth/login';
 
-// Perform the login request
+
 axios.post(apiEndpoint, { username, password })
     .then((response) => {
         console.log('Login Successful!');

@@ -31,7 +31,7 @@ describe('PatientPerformsExercise Routes', () => {
     });
   });
 
-  // GET: Retrieve all records of patients performing exercises
+  
   it('should retrieve all patient performs exercise records', async () => {
     const response = await request(app).get('/patient-performs-exercise');
 
@@ -39,6 +39,5 @@ describe('PatientPerformsExercise Routes', () => {
     expect(Array.isArray(response.body)).toBe(true);
   });
 
-  // Additional tests for other routes can be added similarly...
 
 });
