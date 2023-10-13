@@ -26,7 +26,6 @@
  * Program: ProgramID, AssignedPatient, AssignedProvider, ExerciseList
 
 
-![Diagram.](https://app.gemoo.com/share/image-annotation/571286382809288704?codeId=v6gyZzWGgWdll&origin=imageurlgenerator)
 
 
 
