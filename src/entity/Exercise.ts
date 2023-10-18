@@ -7,6 +7,7 @@ import {
 @Entity()
 export class Exercise {
     @PrimaryGeneratedColumn()
+    id: number;
     ExerciseID: number;
 
     @Column({ type: "varchar", length: 255 })
