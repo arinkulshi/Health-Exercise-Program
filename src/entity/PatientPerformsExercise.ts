@@ -13,8 +13,6 @@ export class PatientPerformsExercise {
     @PrimaryColumn()
     PatientID: number;
 
-    @PrimaryColumn()
-    ExerciseID: number;
 
     @ManyToOne(() => Patient)
     @JoinColumn({ name: "PatientID" })

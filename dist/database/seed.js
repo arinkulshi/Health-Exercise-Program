@@ -24,9 +24,9 @@ function seedData() {
         });
         const exercises = Array(2).fill(null).map(() => {
             const exercise = new Exercise_1.Exercise();
-            exercise.Name = faker_1.faker.person.firstName(); // Generates a random name
-            exercise.Description = faker_1.faker.science.chemicalElement().name;
-            exercise.VideoURL = faker_1.faker.airline.airline().name;
+            exercise.name = faker_1.faker.person.firstName(); // Generates a random name
+            exercise.description = faker_1.faker.science.chemicalElement().name;
+            exercise.videoURL = faker_1.faker.airline.airline().name;
             return exercise;
         });
         const savedPatients = yield index_1.dataSource.manager.save(patients);

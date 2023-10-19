@@ -16,9 +16,9 @@ async function seedData() {
 
     const exercises = Array(2).fill(null).map(() => {
         const exercise = new Exercise();
-        exercise.Name = faker.person.firstName(); // Generates a random name
-        exercise.Description=  faker.science.chemicalElement().name
-        exercise.VideoURL=  faker.airline.airline().name
+        exercise.name = faker.person.firstName(); // Generates a random name
+        exercise.description=  faker.science.chemicalElement().name
+        exercise.videoURL=  faker.airline.airline().name
         return exercise;
     });
 

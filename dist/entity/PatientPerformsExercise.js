@@ -21,10 +21,6 @@ __decorate([
     __metadata("design:type", Number)
 ], PatientPerformsExercise.prototype, "PatientID", void 0);
 __decorate([
-    (0, typeorm_1.PrimaryColumn)(),
-    __metadata("design:type", Number)
-], PatientPerformsExercise.prototype, "ExerciseID", void 0);
-__decorate([
     (0, typeorm_1.ManyToOne)(() => Patient_1.Patient),
     (0, typeorm_1.JoinColumn)({ name: "PatientID" }),
     __metadata("design:type", Patient_1.Patient)

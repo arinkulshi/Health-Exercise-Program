@@ -34,11 +34,9 @@ describe('PatientPerformsExercise Routes', () => {
             ExerciseID: response.body.ExerciseID
         });
     }));
-    // GET: Retrieve all records of patients performing exercises
     it('should retrieve all patient performs exercise records', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(index_1.app).get('/patient-performs-exercise');
         expect(response.status).toBe(200);
         expect(Array.isArray(response.body)).toBe(true);
     }));
-    // Additional tests for other routes can be added similarly...
 });

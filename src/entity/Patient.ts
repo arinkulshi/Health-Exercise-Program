@@ -16,6 +16,7 @@ export class Patient {
 
     @Column({ type: "varchar", length: 255 })
     InjuryType: string;
+    exercises: any[];
 }
 
 

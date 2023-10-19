@@ -11,25 +11,55 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Exercise = void 0;
 const typeorm_1 = require("typeorm");
+const Patient_1 = require("./Patient");
 let Exercise = class Exercise {
 };
 exports.Exercise = Exercise;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Exercise.prototype, "ExerciseID", void 0);
+], Exercise.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: "varchar", length: 255 }),
     __metadata("design:type", String)
-], Exercise.prototype, "Name", void 0);
+], Exercise.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
-], Exercise.prototype, "Description", void 0);
+], Exercise.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: "varchar", length: 255 }),
     __metadata("design:type", String)
-], Exercise.prototype, "VideoURL", void 0);
+], Exercise.prototype, "videoURL", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "integer" }),
+    __metadata("design:type", Number)
+], Exercise.prototype, "progressPercentage", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "integer" }),
+    __metadata("design:type", Number)
+], Exercise.prototype, "thumbs", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "date" }),
+    __metadata("design:type", Date)
+], Exercise.prototype, "dateExerciseCompleted", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "integer" }),
+    __metadata("design:type", Number)
+], Exercise.prototype, "rating", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "integer" }),
+    __metadata("design:type", Number)
+], Exercise.prototype, "difficulty", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => Patient_1.Patient, (patient) => patient.exercises),
+    (0, typeorm_1.JoinColumn)({ name: "patientId" }),
+    __metadata("design:type", Patient_1.Patient)
+], Exercise.prototype, "patient", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Exercise.prototype, "patientId", void 0);
 exports.Exercise = Exercise = __decorate([
     (0, typeorm_1.Entity)()
 ], Exercise);

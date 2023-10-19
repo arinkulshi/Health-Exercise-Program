@@ -19,14 +19,21 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield patientRepository.save(patient);
     return res.send(patient);
 }));
-router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const patientRepository = index_1.dataSource.getRepository(Patient_1.Patient);
-    const patients = yield patientRepository.find();
-    return res.send(patients);
+    const patients = yield patientRepository.find({
+        relations: ["exercises"],
+    });
+    const activePatients = patients.map((patient) => {
+        const activeExercises = patient.exercises.filter((exercise) => exercise.isActive);
+        return Object.assign(Object.assign({}, patient), { exercises: activeExercises });
+    });
+    return res.send(activePatients);
 }));
 router.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const patientRepository = index_1.dataSource.getRepository(Patient_1.Patient);
     yield patientRepository.delete(req.params.id);
     return res.send({ message: "Patient deleted" });
 }));
+module.exports = router;
 module.exports = router;

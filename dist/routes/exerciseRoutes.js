@@ -18,33 +18,16 @@ router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const exercises = yield exerciseRepository.find();
     return res.send(exercises);
 }));
+///Create a POST for exercis where we update progress_percentage, thumbs_up, thumbs_down, date_exercise_completed, rating, difficulty
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const exerciseRepository = index_1.dataSource.getRepository(Exercise_1.Exercise);
-        const exercise = exerciseRepository.create(req.body);
-        yield exerciseRepository.save(exercise);
-        return res.status(201).send(exercise);
-    }
-    catch (error) {
-        console.error("Error:", error);
-        return res.status(500).send("Internal server error");
-    }
+    const exerciseRepository = index_1.dataSource.getRepository(Exercise_1.Exercise);
+    const exercise = exerciseRepository.create(req.body);
+    yield exerciseRepository.save(exercise);
+    return res.send(exercise);
 }));
-router.get("/:exerciseId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const exerciseId = +req.params.exerciseId;
-        const exerciseRepository = index_1.dataSource.getRepository(Exercise_1.Exercise);
-        const exercise = exerciseRepository.find({
-            where: {
-                ExerciseID: exerciseId,
-            },
-        });
-        if (!exercise) {
-            return res.status(404).send("Exercise not found");
-        }
-        return res.status(200).send(exercise);
-    }
-    catch (error) {
-    }
+router.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const exerciseRepository = index_1.dataSource.getRepository(Exercise_1.Exercise);
+    yield exerciseRepository.delete(req.params.id);
+    return res.send({ message: "Exercise deleted" });
 }));
 module.exports = router;

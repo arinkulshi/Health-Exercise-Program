@@ -13,11 +13,23 @@ router.post("/", async (req, res) => {
     return res.send(patient);
 });
 
-router.get("/", async (_req, res) => {
+
+router.get("/", async (req, res) => {
     const patientRepository = dataSource.getRepository(Patient);
-    const patients = await patientRepository.find();
-    return res.send(patients);
-});
+    const patients = await patientRepository.find({
+      relations: ["exercises"],
+    });
+  
+    const activePatients = patients.map((patient) => {
+      const activeExercises = patient.exercises.filter(
+        (exercise) => exercise.isActive
+      );
+      return { ...patient, exercises: activeExercises };
+    });
+  
+    return res.send(activePatients);
+  });
+
 
 
 
@@ -26,6 +38,8 @@ router.delete("/:id", async (req, res) => {
     await patientRepository.delete(req.params.id);
     return res.send({ message: "Patient deleted" });
 });
+
+module.exports = router;
 
 module.exports = router;
 
