@@ -1,4 +1,3 @@
-# hep
 ## Health Exercise Program
 
 ### High-Level Design
