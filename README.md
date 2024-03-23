@@ -28,8 +28,35 @@ Explanation:
 - **Program and Exercise**: A program can contain multiple exercises, and each exercise can be part of multiple programs.
 - **Patient and Exercise**: Patients perform multiple exercises, and each exercise can be performed by multiple patients. (double join)
 
+To run this application:
 
+1. Ensure you have Node.js and TypeScript installed on your system.
 
+2. Install necessary dependencies using npm or yarn:
+
+   ```bash
+   npm install express @types/express
+   ```
+
+   or
+
+   ```bash
+   yarn add express @types/express
+   ```
+
+3. Compile TypeScript code to JavaScript:
+
+   ```bash
+   tsc index.ts
+   ```
+
+4. Run the compiled JavaScript file:
+
+   ```bash
+   node index.js
+   ```
+
+5. Access the server at `http://localhost:3000/` in your web browser or API testing tool.
 
 
 
